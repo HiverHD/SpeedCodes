@@ -1,0 +1,108 @@
+@ECHO OFF
+REM  QBFC Project Options Begin
+REM  HasVersionInfo: Yes
+REM  Companyname: SpeedCodes
+REM  Productname: SpeedCode - ServerSwitch
+REM  Filedescription: Serverlisten wechseln
+REM  Copyrights: HiverHD
+REM  Trademarks: 
+REM  Originalname: ServerSwitch.bat
+REM  Comments: Open Source
+REM  Productversion: 11.11.11.11
+REM  Fileversion: 00.00.00.06
+REM  Internalname: ServerSwitch.bat
+REM  Appicon: 
+REM  AdministratorManifest: No
+REM  QBFC Project Options End
+@ECHO ON
+@echo off
+cd C:\Users\%username%\AppData\Roaming\.minecraft
+cls
+title ServerSwitch
+echo Befehle:
+echo - current
+echo - load
+echo - save
+echo - list
+echo - help
+echo - deletecurrent
+echo - delete
+echo - exit
+echo.
+goto start
+
+
+:start
+set /p befehl=Befehl: - 
+echo.
+goto %befehl%
+
+:load
+set /p loadfilename=Liste aussuchen:
+copy %loadfilename%.dat servers.dat
+echo Serverliste %loadfilename% geladen!
+@echo 123>>current.bat
+del current.bat
+@echo @echo off>>current.bat
+@echo echo %loadfilename%>>current.bat
+@echo ping 1.1.1.1 -n 1 -w 1000>>current.bat
+@echo cls>>current.bat
+@echo echo %loadfilename%>>current.bat
+@echo ping 1.1.1.1 -n 1 -w 1000>>current.bat
+@echo cls>>current.bat
+@echo echo %loadfilename%>>current.bat
+@echo ping 1.1.1.1 -n 1 -w 1000>>current.bat
+@echo cls>>current.bat
+@echo echo %loadfilename%>>current.bat
+@echo ping 1.1.1.1 -n 1 -w 1000>>current.bat
+@echo cls>>current.bat
+@echo exit>>current.bat
+echo.
+goto start
+
+:save
+set /p filename=Neue Liste benennen:
+copy servers.dat %filename%.dat
+echo Serverliste als %filename% gespeichert.
+@echo %filename% >>saves.txt
+echo.
+goto start
+
+:list
+start saves.txt
+echo.
+goto start
+
+:current
+start current.bat
+echo.
+goto start
+
+:deletecurrent
+del servers.dat
+@echo 0>>servers.dat
+echo.
+goto start
+
+:delete
+set /p delete=Liste aussuchen:
+del %delete%.dat
+echo %delete% gelöscht!
+echo.
+goto start
+
+:help
+echo Befehle:
+echo - current
+echo - load
+echo - save
+echo - list
+echo - help
+echo - deletecurrent
+echo - delete
+echo - exit
+echo.
+goto start
+
+:exit
+exit
